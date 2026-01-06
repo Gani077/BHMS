@@ -1,0 +1,414 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Battery Health Monitoring Dashboard</title>
+  <link rel="stylesheet" href="cssbhms.css">
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</head>
+<body>
+  <!-- Fixed top navigation for main sections -->
+  <nav class="top-nav">
+    <div class="nav-inner">
+      <div class="nav-brand">Battery Health Monitoring System</div>
+      <button class="theme-toggle" id="theme-toggle-btn" type="button">Light Mode</button>
+      <button class="nav-toggle" aria-label="Toggle navigation">
+        <span></span>
+        <span></span>
+      </button>
+      <ul class="nav-links">
+        <li><a class="nav-link active" href="#section-dashboard">Dashboard</a></li>
+        <li><a class="nav-link" href="#section-overview">Project Overview</a></li>
+        <li><a class="nav-link" href="#section-team">Team &amp; Institution</a></li>
+        <li><a class="nav-link" href="#section-contact">Contact &amp; Feedback</a></li>
+      </ul>
+    </div>
+  </nav>
+
+  <!-- Section 1: Dashboard (existing functionality preserved) -->
+  <section id="section-dashboard" class="page-section">
+    <header>
+      <h1><span class="title-highlight">Battery Health Monitoring System</span></h1>
+      <p class="subtitle">IDP Project – Hardware + Data Science Dashboard</p>
+      <nav class="tabs">
+        <button class="tab active" data-target="dashboard">Dashboard</button>
+        <button class="tab" data-target="voltage">Voltage</button>
+        <button class="tab" data-target="current">Current</button>
+        <button class="tab" data-target="power">Power</button>
+        <button class="tab" data-target="analytics">Analytics</button>
+        <button class="tab" data-target="temperature">Temperature</button>
+        <button class="tab" data-target="workflow">Workflow</button>
+      </nav>
+    </header>
+
+    <main>
+      <section id="dashboard" class="tab-panel active">
+      <div class="dashboard-layout">
+        <div class="dashboard-left">
+          <div class="cards">
+            <div class="card accent-green">
+              <div class="label">Voltage (V)</div>
+              <div class="value" id="voltage">--</div>
+            </div>
+            <div class="card accent-blue">
+              <div class="label">Current (A)</div>
+              <div class="value" id="current">--</div>
+            </div>
+            <div class="card accent-orange">
+              <div class="label">Power (W)</div>
+              <div class="value" id="power">--</div>
+            </div>
+            <div class="card accent-score">
+              <div class="label">Battery Health Score (%)</div>
+              <div class="value" id="health-score">--</div>
+              <div class="health-badge" id="health-level">–</div>
+            </div>
+          </div>
+          <p class="hint">Use the tabs above to view detailed live charts for each parameter.</p>
+        </div>
+
+        <div class="dashboard-right">
+          <div class="status-panel">
+            <h3>Battery Status</h3>
+            <div class="status-pill status-normal" id="battery-status">Analysing&hellip;</div>
+            <p class="status-note" id="battery-status-note">Status will update based on live voltage and current ranges.</p>
+          </div>
+
+          <div class="info-panel">
+            <h3>System Status</h3>
+            <ul>
+              <li><span class="dot good"></span> Battery Pack Connected</li>
+              <li><span class="dot good"></span> Live Data Streaming</li>
+              <li><span class="dot warn"></span> Monitoring Temperature Margin</li>
+            </ul>
+          </div>
+
+          <div class="info-panel">
+            <h3>Battery Pack Overview</h3>
+            <ul>
+              <li><strong>Pack ID:</strong> IDP-BHMS-01</li>
+              <li><strong>Chemistry:</strong> Li-Ion</li>
+              <li><strong>Nominal Voltage:</strong> 48 V</li>
+              <li><strong>Application:</strong> EV / Energy Storage</li>
+            </ul>
+          </div>
+
+          <div class="info-panel legend">
+            <h3>Health Indicator</h3>
+            <ul>
+              <li><span class="pill good">GOOD</span> Normal operation</li>
+              <li><span class="pill warn">WARNING</span> Check load / cooling</li>
+              <li><span class="pill bad">CRITICAL</span> Immediate action required</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+
+      <!-- Project Overview, Team, Contact are shown only when Dashboard tab is active -->
+      <div id="section-overview" class="section-inner dashboard-subsection">
+        <h2 class="section-title">Project Overview</h2>
+
+        <div class="overview-grid">
+          <div class="overview-text">
+            <h3>Project Title</h3>
+            <p><strong>Battery Health Monitoring System using ESP32 and Data Analytics</strong></p>
+
+            <h3>Problem Statement</h3>
+            <p>Battery packs used in electric vehicles and energy storage often degrade silently, which can lead to reduced performance, unexpected shutdowns and unsafe operating conditions.</p>
+
+            <h3>Objective</h3>
+            <ul>
+              <li>Continuously monitor voltage, current and power of a battery pack.</li>
+              <li>Visualise real-time behaviour and compute key health indicators.</li>
+              <li>Provide a base platform for further data science based prediction.</li>
+            </ul>
+
+            <h3>How the System Works</h3>
+            <ul>
+              <li>Sensors connected to ESP32 measure voltage, current and temperature.</li>
+              <li>Data is logged and exported as CSV for analysis.</li>
+              <li>This web dashboard loads the CSV, computes analytics and renders charts.</li>
+            </ul>
+
+            <h3>Data Science Integration</h3>
+            <p>The dashboard demonstrates data cleaning, feature extraction and visual analytics. In future, machine learning models can be added for battery health prediction and remaining useful life estimation.</p>
+          </div>
+
+          <div class="overview-cards">
+            <h3>Hardware Components Used</h3>
+            <div class="pill-grid">
+              <div class="pill-card">ESP32</div>
+              <div class="pill-card">INA219 Current Sensor</div>
+              <div class="pill-card">Temperature Sensor</div>
+              <div class="pill-card">Relay Module</div>
+              <div class="pill-card">Battery Pack</div>
+            </div>
+
+            <h3>Software &amp; Technologies Used</h3>
+            <div class="pill-grid">
+              <div class="pill-card">Arduino IDE</div>
+              <div class="pill-card">CSV Data Logging</div>
+              <div class="pill-card">Data Visualization</div>
+              <div class="pill-card">Web Dashboard (HTML, CSS, JS)</div>
+              <div class="pill-card">GitHub Hosting (optional)</div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div id="section-team" class="section-inner dashboard-subsection">
+        <h2 class="section-title">Team &amp; Institution</h2>
+
+        <div class="team-grid">
+          <div class="team-card">
+            <h3>Team Members</h3>
+            <ul>
+              <li><strong>N.S Parvateesam</strong> – Roll No: 24A35A4425</li>
+              <li><strong>P.Satish</strong> – Roll No: 24A35A4427</li>
+              <li><strong>G.J.B Mallesh</strong> – Roll No: 24A35A4421</li>
+              <li><strong>S.V.S Ganesh</strong> – Roll No: 24A35A4429</li>
+              <li><strong>M.L Manoj</strong> – Roll No: 24A35A0406(ECE)</li>
+            </ul>
+          </div>
+
+          <div class="team-card">
+            <h3>Project Guide</h3>
+            <p><strong>Y.Suma Chamundeswari</strong><br>Assistant Professor, Department of Data Science</p>
+
+            <h3>Head of the Department</h3>
+            <p<strong>M.V Rajesh</strong><br>Department of Data Science</p>
+          </div>
+
+          <div class="team-card">
+            <h3>College</h3>
+            <p><strong>Pragati Engineering College</strong></p>
+            <p>Surampalem, Andhra Pradesh, India</p>
+            <p>Academic Year: 2024–27</p>
+          </div>
+        </div>
+      </div>
+
+      <div id="section-contact" class="section-inner dashboard-subsection">
+        <h2 class="section-title">Contact &amp; Feedback</h2>
+
+        <div class="contact-grid">
+          <div class="contact-card">
+            <h3>Contact Information</h3>
+            <p><span class="contact-icon">&#9993;</span> Email: <strong>svsganesh077@gmail.com</strong></p>
+            <p><span class="contact-icon">&#9742;</span> Phone: +91-9642269249</p>
+            <p><span class="contact-icon">&#9873;</span> College Address: 1-378, ADB Road, Surampalem,Near Kakinada, Kakinada District,Andhra Pradesh, India-533437.</p>
+          </div>
+
+          <div class="contact-card">
+  <h3>Feedback Form</h3>
+
+  <form id="feedback-form" name="contact-form">
+    
+    <div class="form-row">
+      <label for="fb-name">Name</label>
+      <input type="text" id="fb-name" name="name" required>
+    </div>
+
+    <div class="form-row">
+      <label for="fb-email">Email</label>
+      <input type="email" id="fb-email" name="email" required>
+    </div>
+
+    <div class="form-row">
+      <label for="fb-message">Feedback Message</label>
+      <textarea id="fb-message" name="message" rows="4" required></textarea>
+    </div>
+
+    <button type="submit" class="small-btn">Submit Feedback</button>
+
+    <p class="form-note">For academic demonstration only</p>
+    <p id="feedback-status" class="form-status" aria-live="polite"></p>
+
+  </form>
+</div>
+
+          </div>
+        </div>
+      </div>
+    </section>
+
+      <section id="analytics" class="tab-panel">
+      <div class="panel-header">
+        <h2>Data Analytics Summary</h2>
+        <div class="analytics-actions">
+          <button id="reload-data-btn" class="small-btn">Reload Data</button>
+          <button id="download-csv-btn" class="small-btn secondary">Download Dataset (CSV)</button>
+        </div>
+      </div>
+      <div class="analytics-grid">
+        <div class="info-panel kpi">
+          <h3>Minimum Voltage</h3>
+          <p id="min-voltage">--</p>
+        </div>
+        <div class="info-panel kpi">
+          <h3>Maximum Voltage</h3>
+          <p id="max-voltage">--</p>
+        </div>
+        <div class="info-panel kpi">
+          <h3>Average Voltage</h3>
+          <p id="avg-voltage">--</p>
+        </div>
+        <div class="info-panel kpi">
+          <h3>Average Current</h3>
+          <p id="avg-current">--</p>
+        </div>
+        <div class="info-panel kpi">
+          <h3>Peak Power</h3>
+          <p id="peak-power">--</p>
+        </div>
+      </div>
+      </section>
+
+      <section id="voltage" class="tab-panel">
+      <div class="panel-header">
+        <h2>Voltage</h2>
+        <div class="reading">Latest: <span id="voltage-latest">--</span> V</div>
+      </div>
+      <div class="chart-box">
+        <canvas id="voltageChart"></canvas>
+      </div>
+      </section>
+
+      <section id="current" class="tab-panel">
+      <div class="panel-header">
+        <h2>Current</h2>
+        <div class="reading">Latest: <span id="current-latest">--</span> A</div>
+      </div>
+      <div class="chart-box">
+        <canvas id="currentChart"></canvas>
+      </div>
+      </section>
+
+      <section id="power" class="tab-panel">
+      <div class="panel-header">
+        <h2>Power</h2>
+        <div class="reading">Latest: <span id="power-latest">--</span> W</div>
+      </div>
+      <div class="chart-box">
+        <canvas id="powerChart"></canvas>
+      </div>
+      </section>
+
+      <section id="temperature" class="tab-panel">
+      <div class="panel-header">
+        <h2>Temperature (Future Scope)</h2>
+        <div class="reading">Sensor integration planned</div>
+      </div>
+      <div class="dashboard-layout simple">
+        <div class="dashboard-left">
+          <div class="cards">
+            <div class="card accent-temp">
+              <div class="label">Temperature (&deg;C)</div>
+              <div class="value">--</div>
+              <p class="small-note">Real sensor data to be integrated in hardware phase.</p>
+            </div>
+          </div>
+        </div>
+        <div class="dashboard-right">
+          <div class="chart-box">
+            <canvas id="temperatureChart"></canvas>
+          </div>
+        </div>
+      </div>
+      <!-- Future scope: Temperature values and chart will be driven by an additional sensor column in CSV -->
+      </section>
+
+      <section id="workflow" class="tab-panel">
+      <div class="panel-header">
+        <h2>Data Science Workflow</h2>
+      </div>
+      <div class="workflow-timeline" id="workflow-timeline">
+        <div class="workflow-line">
+          <div class="workflow-line-progress" id="workflow-line-progress"></div>
+        </div>
+        <div class="workflow-steps">
+          <div class="workflow-step" data-step="1">
+            <button type="button" class="workflow-node" aria-label="Step 1">
+              <span class="workflow-node-inner">1</span>
+            </button>
+            <div class="workflow-step-card">
+              <h3>Data Collection from Sensors</h3>
+              <p>Voltage, current and power are captured from the battery pack using appropriate sensing hardware.</p>
+            </div>
+          </div>
+          <div class="workflow-step" data-step="2">
+            <button type="button" class="workflow-node" aria-label="Step 2">
+              <span class="workflow-node-inner">2</span>
+            </button>
+            <div class="workflow-step-card">
+              <h3>Raw Data Logging</h3>
+              <p>Sensor readings are logged over time on a microcontroller or data acquisition system.</p>
+            </div>
+          </div>
+          <div class="workflow-step" data-step="3">
+            <button type="button" class="workflow-node" aria-label="Step 3">
+              <span class="workflow-node-inner">3</span>
+            </button>
+            <div class="workflow-step-card">
+              <h3>Data Cleaning &amp; CSV Conversion</h3>
+              <p>Noise is removed, units are checked and the dataset is exported into a clean CSV file.</p>
+            </div>
+          </div>
+          <div class="workflow-step" data-step="4">
+            <button type="button" class="workflow-node" aria-label="Step 4">
+              <span class="workflow-node-inner">4</span>
+            </button>
+            <div class="workflow-step-card">
+              <h3>Visualization &amp; Analysis</h3>
+              <p>This dashboard loads the CSV, computes analytics and plots charts to understand behaviour.</p>
+            </div>
+          </div>
+          <div class="workflow-step" data-step="5">
+            <button type="button" class="workflow-node" aria-label="Step 5">
+              <span class="workflow-node-inner">5</span>
+            </button>
+            <div class="workflow-step-card">
+              <h3>Future Prediction Scope</h3>
+              <p>In the next phase, machine learning models can be used for health prediction and remaining life estimation.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </main>
+  </section>
+
+  <footer>
+    <div class="footer-bottom">
+      Battery Health Monitoring System &middot; Your College Name &middot; Academic Year 2025–26 &middot; © All Rights Reserved
+    </div>
+  </footer>
+
+  <script src="jsbhms.js"></script>
+  <script>
+  const scriptURL = 'https://script.google.com/macros/s/AKfycbxNHdYA8pIWtJ2nLR9mRt4m8a77oN1DMcyK6MJx7ywgZDKSD_z3SP-KKdeOIQKOTZMP0g/exec';
+  const form = document.getElementById('feedback-form');
+  const statusMsg = document.getElementById('feedback-status');
+
+  form.addEventListener('submit', e => {
+    e.preventDefault();
+
+    statusMsg.textContent = "Submitting feedback...";
+
+    fetch(scriptURL, {
+      method: 'POST',
+      body: new FormData(form)
+    })
+    .then(response => {
+      statusMsg.textContent = "Thank you! Your feedback has been submitted.";
+      form.reset();
+    })
+    .catch(error => {
+      statusMsg.textContent = "Error submitting feedback. Please try again.";
+      console.error('Error!', error.message);
+    });
+  });
+</script>
+
+
+</body>
+</html>
